@@ -4,13 +4,13 @@ import { galleryItems } from './gallery-items.js';
 
 
 
-const galleryCards = document.querySelector(".gallery");
+const galleryImg = document.querySelector(".gallery");
 
 
-const imgConteiner = creatImgCards(galleryItems);
-galleryCards.insertAdjacentHTML("beforeend", imgConteiner);
+const imgLibrary = ImgCards(galleryItems);
+galleryImg.insertAdjacentHTML("beforeend", imgLibrary);
 
-function creatImgCards(galleryItems) {
+function ImgCards(galleryItems) {
     return galleryItems
         .map(({ original, preview, description }) => {
             return `
@@ -27,6 +27,6 @@ let lightbox = new SimpleLightbox(".gallery a", {
 });
 
 console.log(captionDelay);
-function BlockEventClickLoad(e) {
+function clickBlock(e) {
     e.preventDefault();
 }

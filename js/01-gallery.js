@@ -6,11 +6,11 @@ import { galleryItems } from './gallery-items.js';
 const gallery = document.querySelector(".gallery");
 
 
-const imgConteiner = creatImgCards(galleryItems);
-gallery.insertAdjacentHTML("beforeend", imgConteiner);
+const imgGallery= imgCard(galleryItems);
+gallery.insertAdjacentHTML(`beforeend`, imgGallery);
 
 
-function creatImgCards(galleryItems) {
+function imgCard(galleryItems) {
     return galleryItems
         .map(({ original, preview, description }) => {
             return `<div class="gallery__item">
@@ -27,35 +27,33 @@ function creatImgCards(galleryItems) {
         .join("");
 }
 
-// click
+gallery.addEventListener("click", OpenClickModal);
 
-gallery.addEventListener("click", onOpenClickModal);
-
-function onOpenClickModal(event) {
-    BlockEventClickLoad(event);
+function OpenClickModal(event) {
+    clickBlock(event);
 
     if (event.target.nodeName !== "IMG") {
         return;
     }
-    modalBigImageOn();
+    modalBigImg();
 };
 
 
 
-function modalBigImageOn() {
-    const instance = basicLightbox.create(`
+function modalBigImg() {
+    const card = basicLightbox.create(`
     <img src="${event.target.dataset.source}">
     
 `);
-    instance.show(instance);
-    if (instance.visible()) {
-        window.addEventListener("keydown", onCloseKeyEsc);
+    card.show(card);
+    if (card.visible()) {
+        window.addEventListener("keydown", closeEsc);
     }
 
-    function onCloseKeyEsc(e) {
+    function closeEsc(e) {
         if (e.code === "Escape") {
-            instance.close();
-            window.removeEventListener("keydown", onCloseKeyEsc);
+            card.close();
+            window.removeEventListener("keydown", closeEsc);
             return;
         }
     }
@@ -63,6 +61,6 @@ function modalBigImageOn() {
 
 
 
-function BlockEventClickLoad(event) {
+function clickBlock(event) {
     event.preventDefault();
 }
