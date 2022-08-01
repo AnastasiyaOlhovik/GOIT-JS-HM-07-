@@ -41,20 +41,30 @@ function OpenClickModal(event) {
 
 
 function modalBigImg() {
-    const card = basicLightbox.create(`
-    <img src="${event.target.dataset.source}">
+    const instance = basicLightbox.create(
+    `
+    <img src="${event.target.dataset.source}">`
     
-`);
-    card.show(card);
-    if (card.visible()) {
+,
+    {
+        Close: (instance) => {
+            window.removeEventListener("keydown", closeEsc);
+           
+        },
+    }
+   
+    )
+    
+    if (instance.show(instance)) {
         window.addEventListener("keydown", closeEsc);
     }
+    
+ 
 
     function closeEsc(e) {
-        if (e.code === "Escape") {
-            card.close();
-            window.removeEventListener("keydown", closeEsc);
-            return;
+        if (e.code === "Escape" && instance.visible()) {
+            instance.close();
+          
         }
     }
 };

@@ -7,10 +7,10 @@ import { galleryItems } from './gallery-items.js';
 const galleryImg = document.querySelector(".gallery");
 
 
-const imgLibrary = ImgCards(galleryItems);
+const imgLibrary = imgCard(galleryItems);
 galleryImg.insertAdjacentHTML("beforeend", imgLibrary);
 
-function ImgCards(galleryItems) {
+function imgCard(galleryItems) {
     return galleryItems
         .map(({ original, preview, description }) => {
             return `
@@ -26,7 +26,3 @@ let lightbox = new SimpleLightbox(".gallery a", {
     captionDelay: 250,
 });
 
-console.log(captionDelay);
-function clickBlock(e) {
-    e.preventDefault();
-}
